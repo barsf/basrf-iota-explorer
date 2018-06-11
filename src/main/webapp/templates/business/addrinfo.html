@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#FF0000"/>
+<title>Iota Explorer</title>
+<!-- Bootstrap -->
+<link href="../../static/css/vendors/bootstrap.css" rel="stylesheet"/>
+<!--Cookfont-->
+<link href="../static/css/vendors/font-awesome.min.css" rel="stylesheet"/>
+
+<link href="../../static/css/customs/custom.css" rel="stylesheet"/>
+
+<!-- =============================body=================================== -->
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IOTA explorer </a>
+            <span class="navbar-brand">&nbsp;&nbsp;&nbsp;| </span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/live-transactions">Live</a></li>
+                <li><a href="/barsfapi">API</a></li>
+                <li  id="search_2" class="search collapse navbar-collapse">
+                    <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                        <input type="text" class="form-control input-lg"
+                               placeholder="transaction/address/bundle/tag -> Enter">
+                    </div>
+                </li>
+            </ul>
+            <div id="search" class="search collapse navbar-collapse">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                    <input type="text" class="form-control input-lg"
+                           placeholder="transaction/address/bundle/tag -> Enter">
+                </div>
+            </div>
+        </div><!--/.nav-collapse -->
+
+    </div>
+</nav>
+
+<div class="container entry">
+    <div class="page-header">
+        <h1>Address
+            <small>info</small>
+        </h1>
+    </div>
+    <div class="jumbotron">
+
+        <div class="container bundle">
+            <div class="row">
+                <div class="col-xs-12"><h3 class="section-title">IOTA Address info</h3>
+                    <div class="section-white big-padding">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="info-row bb"><label class="info-row__label"><span
+                                        class="translation_missing"
+                                        title="translation missing: en.transaction.iota_address">Iota Address</span></label><a
+                                        class="info-row__value shan break" id="hash" th:text="${pk}"> </a>
+                                    <button class="copy btn btn-xs" data-clipboard-target="#hash" data-copy="Copy" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16">
+                                            <path fill="#8FA9B0" fill-rule="nonzero"
+                                                  d="M10.943 1H6c-.735 0-1.333.571-1.333 1.273v8.909c0 .702.598 1.273 1.333 1.273h6.667c.735 0 1.333-.571 1.333-1.273V3.918L10.943 1zM10 4.818V1.636l3.333 3.182H10zM3.333 3.545v10.182h8V15h-8C2.598 15 2 14.43 2 13.727V3.545h1.333z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <br/>
+                                <div class="summary-info">
+                                    <div class="col-xs-4"><label
+                                            class="info-row__label">Balance</label><p
+                                            class="summary-info__col-title shan" id="balance"> </p></div>
+
+                                        <div class="col-xs-4"><label class="info-row__label">Number of
+                                            transactions</label>
+                                            <p class="summary-info__col-title shan" id="numberoftran"></p></div>
+
+                                    <div class="col-xs-4"><label class="info-row__label">Used</label>
+                                        <p class="summary-info__col-title shan" id="Used"></p></div>
+                                </div>
+                                <div class="summary-info bb">
+                                    <div class="col-xs-6"><label class="info-row__label">Received</label><p
+                                            class="summary-info__col-title shan" id="received"> </p></div>
+                                    <div class="col-xs-6"><label
+                                            class="info-row__label">Sent</label><p
+                                            class="summary-info__col-title shan" id="sent"> </p></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12"><p class="separator">Transactions <small id="tx_additive"></small> </p>
+                <table id="table_list" class="table wb_table table-hover">
+                    <tr>
+                        <th style="width: 14%">Time</th>
+                        <th>Hash</th>
+                        <th>Bundle</th>
+                        <th style="width: 10%;">Amount</th>
+                        <th style="width: 10%;">State</th>
+                    </tr>
+                    <tr id="temp_tr">
+                        <td> </td>
+                        <td> </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+
+<footer class="footer">
+    <div class="container "><a href="/live-transactions">Live transactions</a>
+        <span>|</span>
+        <a href="http://barsf.org">barsf</a></div>
+</footer>
+<!-- jQuery -->
+<script src="../../static/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../../static/js/bootstrap.min.js"></script>
+<!-- copy -->
+<script type="text/javascript" src="../../static/js/jquery.zclip.js"></script>
+<!-- main -->
+<script src="../../static/js/custom.js"></script>
+<script>
+ loadAddress();
+</script>
+</body>
+<!-- ========================================body========================================= -->
+
+</html>

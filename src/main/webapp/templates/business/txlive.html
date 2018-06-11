@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#FF0000"/>
+<title>Iota Explorer</title>
+<!-- Bootstrap -->
+<link href="../static/css/vendors/bootstrap.css" rel="stylesheet"/>
+<!--Cookfont-->
+<link href="../static/css/vendors/font-awesome.min.css" rel="stylesheet"/>
+
+<link href="../static/css/customs/custom.css" rel="stylesheet"/>
+
+<!-- =============================body=================================== -->
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IOTA explorer </a>
+            <span class="navbar-brand">&nbsp;&nbsp;&nbsp;| </span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/live-transactions">Live</a></li>
+                <li><a href="/barsfapi">API</a></li>
+                <li id="search_2" class="search collapse navbar-collapse">
+                    <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                        <input type="text" class="form-control input-lg"
+                               placeholder="transaction/address/bundle/tag -> Enter">
+                    </div>
+                </li>
+            </ul>
+            <div id="search" class="search collapse navbar-collapse">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                    <input type="text" class="form-control input-lg"
+                           placeholder="transaction/address/bundle/tag -> Enter">
+                </div>
+            </div>
+        </div><!--/.nav-collapse -->
+
+    </div>
+</nav>
+
+<div class="container entry">
+    <div class="jumbotron ">
+        <h2 class="bb">Live Transaction <small>Only non-zero value</small> </h2>
+        <div class="text-center entry">
+            <ul id = "tx_live_home" class="list-unstyled">
+
+            </ul>
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+
+<footer class="footer">
+    <div class="container "><a href="/live-transactions">Live transactions</a>
+        <span>|</span>
+        <a href="http://barsf.org">barsf</a></div>
+</footer>
+<!-- jQuery -->
+<script src="../static/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../static/js/bootstrap.min.js"></script>
+
+<script src="../static/js/custom.js"></script>
+<script>
+    liveTx();
+</script>
+</body>
+<!-- ========================================body========================================= -->
+
+</html>

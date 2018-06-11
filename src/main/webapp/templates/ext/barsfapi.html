@@ -1,0 +1,478 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#FF0000"/>
+<title>Barsf Api</title>
+<!-- Bootstrap -->
+<link href="../../static/css/vendors/bootstrap.css" rel="stylesheet"/>
+<!--Cookfont-->
+<!--<link href="../static/css/vendors/font-awesome.min.css" rel="stylesheet"/>-->
+
+<link href="../../static/css/customs/custom.css" rel="stylesheet"/>
+<link rel="stylesheet"
+      href="../../static/css/vendors/railscasts.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IOTA explorer </a>
+            <span class="navbar-brand">&nbsp;&nbsp;&nbsp;| </span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/live-transactions">Live</a></li>
+                <li class="active"><a href="/barsfapi">API</a></li>
+            </ul>
+            <div id="search" class="search collapse navbar-collapse">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                    <input type="text" class="form-control input-lg"
+                           placeholder="transaction/address/bundle/tag -> Enter">
+                </div>
+            </div>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container entry">
+    <div class="page-header">
+        <h1>Barsf API Documentation
+        </h1>
+    </div>
+    <div class="col-xs-3">
+        <div class="panel panel-default" style="position: fixed;">
+            <div class="panel-heading">APIs</div>
+            <div id="apis" class="list-group">
+                <!--<a href="#C" class="list-group-item active">batchFindTransactions</a>-->
+                <a href="#A" class="list-group-item active">
+                    getBarsfBalances
+                </a>
+                <a href="#B" class="list-group-item">getBarsfNodeInfo</a>
+                <a href="#D" class="list-group-item">getBarsfTransactionStates</a>
+                <a href="#E" class="list-group-item">getBarsfStorageFeeRates</a>
+            </div>
+        </div>
+    </div>
+    <div style="display: none; clear: both"></div>
+    <div class="col-xs-9">
+        <!--<div class="oneApi">-->
+            <!--<div id="C" class="target padding-10">-->
+                <!--<h3>-->
+                    <!--<ins>batchFindTransactions</ins>-->
+                <!--</h3>-->
+            <!--</div>-->
+            <!--<h4 class="text-primary">CURL REQUEST</h4>-->
+            <!--<pre><code class="nginx">curl http://localhost:14265 \-->
+<!-- -X POST \-->
+<!-- -H 'Content-Type: application/json' \-->
+<!-- -H 'X-IOTA-API-Version: 1' \-->
+<!-- -d '{"command": "batchFindTransactions","addresses":["999ABGPHBHXBQSQEFZJHDTYMLTTHAQWNANOFCXXMQWHATOLPFPMCEHK9HXAG9MVIEPJ9DFNZKCMOSOXBB","SJEXOPUTDMMZQJMDBHLIDHUWTRGSVATJKMRWRFQZRWFRUSXCXEDLSGWCHZRLHMRMYBH9SKJQSSDPBZSUB"]}'-->
+        <!--</code></pre>-->
+            <!--<h4 class="text-primary">BODY PARAMS</h4>-->
+            <!--<table cellspacing="0" cellpadding="0" border="1" style="width: 100%">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<th>PARAM</th>-->
+                    <!--<th>TYPE</th>-->
+                    <!--<th>REQUIRED</th>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>command</td>-->
+                    <!--<td>string</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>addresses</td>-->
+                    <!--<td>array</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<h4 class="text-primary">RESPONSE</h4>-->
+            <!--<pre><code class="json">{-->
+  <!--hashes: [-->
+    <!--["ZJVYUGTDRPDYFGFXMKOTV9ZWSGFK9CFPXTITQLQNLPPG9YNAARMKNKYQO9GSCSBIOTGMLJUFLZWSY9999"],-->
+    <!--["ZJVYUGTDRPDYFGFXMKOTV9ZWSGFK9CFPXTITQLQNLPPG9YNAARMKNKYQO9GSCSBIOTGMLJUFLZWSY9999"]-->
+  <!--]-->
+<!--}-->
+        <!--</code></pre>-->
+            <!--<h4 class="text-primary">RETURN VALUE</h4>-->
+            <!--<ul>-->
+                <!--<li>hashes:按请求顺序返回交易hash，没有则为空数组</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div class="oneApi">
+            <div id="A" class="target padding-10">
+                <h3>
+                    <ins>getBarsfBalances</ins>
+                </h3>
+            </div>
+            <h4 class="text-primary">CURL REQUEST</h4>
+            <pre><code class="nginx">curl http://localhost:14265 \
+-X POST \
+-H 'Content-Type: application/json' \
+-H 'X-IOTA-API-Version: 1' \
+-d '{"command": "getBarsfBalances", "addresses": ["999ABGPHBHXBQSQEFZJHDTYMLTTHAQWNANOFCXXMQWHATOLPFPMCEHK9HXAG9MVIEPJ9DFNZKCMOSOXBB","SJEXOPUTDMMZQJMDBHLIDHUWTRGSVATJKMRWRFQZRWFRUSXCXEDLSGWCHZRLHMRMYBH9SKJQSSDPBZSUB"]}'
+        </code></pre>
+            <h4 class="text-primary">BODY PARAMS</h4>
+            <table cellspacing="0" cellpadding="0" border="1" style="width: 100%">
+                <tbody>
+                <tr>
+                    <th>PARAM</th>
+                    <th>TYPE</th>
+                    <th>REQUIRED</th>
+                </tr>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>Y</td>
+                </tr>
+                <tr>
+                    <td>addresses</td>
+                    <td>array</td>
+                    <td>Y</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 class="text-primary">RESPONSE</h4>
+            <pre><code class="json">{
+  "balances": ["140000000","410000000000"],
+  "lastChangedMilestoneIndexes": [1399,1678],
+  "reference": "99A9DG9MNJROPCVJDCWL9OKSMZSYISCRXDWQUDPGPPBCBVOTBADT9K9BQCUXIII9OEBWSYGKQXHCCUFQ9",
+  "barsfMilestoneIndex": 1899,
+  "duration": 34
+}
+        </code></pre>
+            <h4 class="text-primary">RETURN VALUE</h4>
+            <ul>
+                <li>balances: 按请求顺序返回的barsf地址余额,未找到返回0</li>
+                <li>lastChangedMilestoneIndexes: 上一次交手续费（余额改变）对应的里程碑序号,未找到地址为-1</li>
+                <li>reference: 获得地址余额同一时刻对应的barsf里程碑hash值</li>
+                <li>barsfMilestoneIndex: 上述里程碑对应的序号</li>
+            </ul>
+        </div>
+
+        <div class="oneApi">
+            <div id="B" class="target padding-10">
+                <h3>
+                    <ins>getBarsfNodeInfo</ins>
+                </h3>
+            </div>
+            <h4 class="text-primary">CURL REQUEST</h4>
+            <pre><code class="nginx">curl http://localhost:14265 \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'X-IOTA-API-Version: 1' \
+  -d '{"command": "getBarsfNodeInfo"}'
+</code></pre>
+            <h4 class="text-primary">BODY PARAMS</h4>
+            <table cellspacing="0" cellpadding="0" border="1" style="width: 100%">
+                <tbody>
+                <tr>
+                    <th>PARAM</th>
+                    <th>TYPE</th>
+                    <th>REQUIRED</th>
+                </tr>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>Y</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 class="text-primary">RESPONSE</h4>
+            <!--"nextServiceChangeAddress":" NYOLVOBERBVRBLSKPNVUTEPGNIFZCOIYEERFVPCQLGRTJQ9XSSOIGQUZZVCKVLIFSJBBNJKZWCHPZ9999",-->
+            <pre><code class="json">{
+  "barsfAppName": "BARSF-IRI",
+  "barsfAppVersion": "0.0.1",
+  "nextFeeAddress": "HY9USJUWSEXLZPSPXINYWFAZNHEIXUFCALFESASPSPCAGDGVWROUFZOYSPDLPZLSJCWSEGJCVVFGA9999",
+  "nextStorageFeeRate": 0.1,
+  "latestBarsfMilestone": "VBVEUQYE99LFWHDZRFKTGFHYGDFEAMAEBGUBTTJRFKHCFBRTXFAJQ9XIUEZQCJOQTZNOOHKUQIKOY9999",
+  "latestBarsfMilestoneIndex": 1234,
+  "latestIotaMilestone": "XZPFUUIRUTSION9I9GDZCHNWVXGGEGUSMIXGQNWZO9G9FTAWDRHXONKDTXXBQYHLYC9GVDRZWKUV99999",
+  "latestIotaMilestoneIndex": 492113,
+  "latestIotaSolidSubtangleMilestone": "XZPFUUIRUTSION9I9GDZCHNWVXGGEGUSMIXGQNWZO9G9FTAWDRHXONKDTXXBQYHLYC9GVDRZWKUV99999",
+  "latestIotaSolidSubtangleMilestoneIndex": 492113,
+  "duration": 34
+}
+        </code></pre>
+            <h4 class="text-primary">RETURN VALUE</h4>
+            <ul>
+                <li>barsfAppName: barsf节点App名称</li>
+                <li>barsfAppVersion: barsf节点App版本</li>
+                <li>nextFeeAddress: 下一次账户管理费地址、转账手续费地址</li>
+                <li>nextStorageFeeRate: 下一次仓储管理费费率</li>
+                <!--<li>nextStorageManagementAddress: 下一次仓储管理费缴纳账户地址</li>-->
+                <!--<li>nextStorageManagementRate: 下一次仓储管理费费率</li>-->
+                <!--<li>nextServiceChangeAddress: 下一次转账手续费缴纳账户地址</li>-->
+                <li>latestBarsfMilestone: 最近的里程碑hash值</li>
+                <li>latestBarsfMilestoneIndex: 最近的barsf里程碑序号</li>
+                <li>latestIotaMilestone: 最近的Iota里程碑hash值(iota节点数据)</li>
+                <li>latestIotaMilestoneIndex: 最近的Iota里程碑序号(iota节点数据)</li>
+                <li>latestIotaSolidSubtangleMilestone: 最近的Iota实心里程碑hash值(iota 节点数据)</li>
+                <li>latestIotaSolidSubtangleMilestoneIndex: 最近的Iota实心里程碑序号(iota 节点数据)</li>
+            </ul>
+        </div>
+
+        <!--<div class="oneApi">-->
+            <!--<div id="C" class="target padding-10">-->
+                <!--<h3>-->
+                    <!--<ins>isBarsfTranaction</ins>-->
+                <!--</h3>-->
+            <!--</div>-->
+            <!--<h4 class="text-primary">CURL REQUEST</h4>-->
+            <!--<pre><code class="nginx">curl http://localhost:14265 \-->
+  <!-- -X POST \-->
+  <!-- -H 'Content-Type: application/json' \-->
+  <!-- -H 'X-IOTA-API-Version: 1' \-->
+  <!-- -d '{"command": "isBarsfTranaction", "hashes": ["RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM"]}'-->
+            <!--</code></pre>-->
+            <!--<h4 class="text-primary">BODY PARAMS</h4>-->
+            <!--<table cellspacing="0" cellpadding="0" border="1" style="width: 100%">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<th>PARAM</th>-->
+                    <!--<th>TYPE</th>-->
+                    <!--<th>REQUIRED</th>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>command</td>-->
+                    <!--<td>string</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>hashes</td>-->
+                    <!--<td>array</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<h4 class="text-primary">RESPONSE</h4>-->
+            <!--<pre><code class="json">{-->
+  <!--"states": [true],-->
+  <!--"duration": 34-->
+<!--}-->
+        <!--</code></pre>-->
+            <!--<h4 class="text-primary">RETURN VALUE</h4>-->
+            <!--<ul>-->
+                <!--<li>states: 按请求次序排列的结果集</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+
+        <div class="oneApi">
+            <div id="D" class="target padding-10">
+                <h3>
+                    <ins>getBarsfTransactionStates</ins>
+                </h3>
+            </div>
+            <h4 class="text-primary">CURL REQUEST</h4>
+            <pre><code class="nginx">curl http://localhost:14265 \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'X-IOTA-API-Version: 1' \
+  -d '{"command": "getBarsfTransactionStates", "hashes": ["KUIIOVBBEAC9GKXCIDOCSJCURJWJJYSIHLSOGIL9GMWTDHVTGGIVGWZKAJXEORJRRTEKCPWDNBQI99999","CUIIOVBBEAC9GKXCIDOCSJCURJWJJYSIHLSOGIL9GMWTDHVTGGIVGWZKAJXEORJRRTEKCPWDNBQI99999"]}'
+            </code></pre>
+            <h4 class="text-primary">BODY PARAMS</h4>
+            <table cellspacing="0" cellpadding="0" border="1" style="width: 100%">
+                <tbody>
+                <tr>
+                    <th>PARAM</th>
+                    <th>TYPE</th>
+                    <th>REQUIRED</th>
+                </tr>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>Y</td>
+                </tr>
+                <tr>
+                    <td>hashes</td>
+                    <td>array</td>
+                    <td>Y</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 class="text-primary">RESPONSE</h4>
+            <!--{"type":"notfound","state":""},-->
+            <!--{"type":"coin","state":"success"}-->
+            <pre><code class="json">{
+    "states": ["sucess","pending"],
+    "barsfMilestone": "INRTUYSZCWBHGFGGXXPWRWBZACYAFGVRRP9VYEQJOHYD9URMELKWAFYFMNTSP9MCHLXRGAFMBOZPZ9999",
+    "barsfMilestoneIndex": 128,
+    "duration": 30
+}
+        </code></pre>
+            <h4 class="text-primary">RETURN VALUE</h4>
+            <ul>
+                <li>states: 按请求顺序返回结果集,其中:
+                    <!--<p>type:</p>-->
+                    <!--<table border="1" style="width: 80%;">-->
+                        <!--<tr><td>notfound</td><td>交易hash未找到</td></tr>-->
+                        <!--<tr><td>unbarsftrans</td><td>非合法的barsf交易</td></tr>-->
+                        <!--<tr><td>transfer</td><td>转账交易</td></tr>-->
+                        <!--<tr><td>coin</td><td>铸币</td></tr>-->
+                        <!--<tr><td>withdraw</td><td>回铸</td></tr>-->
+                    <!--</table>-->
+                    <!--<p>state:</p>-->
+                    <table border="1" style="width: 80%;">
+                        <tr><td>notfound</td><td>交易hash未找到</td></tr>
+                        <tr><td>notbarsf</td><td>不是barsf交易</td></tr>
+                        <tr><td>success</td><td>barsf确认成功</td></tr>
+                        <tr><td>invalid</td><td>barsf验证失败</td></tr>
+                        <tr><td>pending</td><td>等待处理</td></tr>
+                    </table>
+                </li>
+
+                <li>barsfMilestone:获得交易信息同一时刻对应的barsf里程碑hash值</li>
+                <li>barsfMilestoneIndex: 上述里程碑对应的序号</li>
+            </ul>
+        </div>
+
+        <!--<div class="oneApi">-->
+            <!--<div id="E" class="target padding-10">-->
+                <!--<h3>-->
+                    <!--<ins>estimateBarsfStorageFee</ins>-->
+                <!--</h3>-->
+            <!--</div>-->
+            <!--<h4 class="text-primary">CURL REQUEST</h4>-->
+            <!--<pre><code class="nginx">curl http://localhost:14265 \-->
+  <!-- -X POST \-->
+  <!-- -H 'Content-Type: application/json' \-->
+  <!-- -H 'X-IOTA-API-Version: 1' \-->
+  <!-- -d '{"command": "estimateBarsfStorageFee","addresses":["RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM", "BVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRZZZ"]}'-->
+            <!--</code></pre>-->
+            <!--<h4 class="text-primary">BODY PARAMS</h4>-->
+            <!--<table cellspacing="0" cellpadding="0" border="1" style="width: 100%">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<th>PARAM</th>-->
+                    <!--<th>TYPE</th>-->
+                    <!--<th>REQUIRED</th>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>command</td>-->
+                    <!--<td>string</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>addresses</td>-->
+                    <!--<td>array</td>-->
+                    <!--<td>Y</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<h4 class="text-primary">RESPONSE</h4>-->
+            <!--<pre><code class="json">{-->
+    <!--"results": [-->
+      <!--{"rate":0.1, "amount":4000000000,"storageTimeUnitFrom":"100","storageTimeUnitTo":"130","address":"RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM"},-->
+      <!--{"rate":0.15, "amount":4000000000,"storageTimeUnitFrom":"130","storageTimeUnitTo":"150", "address":"RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM"},-->
+      <!--{"rate":0.1, "amount":3000000,"storageTimeUnitFrom":"100","storageTimeUnitTo":"130","address":" BVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRZZZ"},-->
+      <!--{"rate":0.15, "amount":3000000,"storageTimeUnitFrom":"130","storageTimeUnitTo":"150" ,"address":"BVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRZZZ"}-->
+    <!--],-->
+    <!--"duration": 10-->
+<!--}-->
+            <!--</code></pre>-->
+            <!--<h4 class="text-primary">RETURN VALUE</h4>-->
+            <!--<ul>-->
+                <!--<li>rate: 该段时间间隔内的费率</li>-->
+                <!--<li>amount: 可能的存储金额</li>-->
+                <!--<li>storageTimeUnitFrom: 可能的存储起始时间</li>-->
+                <!--<li>storageTimeUnitTo: 可能的存储截止时间</li>-->
+                <!--<li>address: 对应的存储地址</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div class="oneApi">
+            <div id="E" class="target padding-10">
+                <h3>
+                    <ins>getBarsfStorageFeeRates</ins>
+                </h3>
+            </div>
+            <h4 class="text-primary">CURL REQUEST</h4>
+            <pre><code class="nginx">curl http://localhost:14265 \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'X-IOTA-API-Version: 1' \
+  -d '{"command": "getBarsfStorageFeeRates", "startBarsfMilestoneIndex": 1200, "endBarsfMilestoneIndex": 1300}'
+            </code></pre>
+            <h4 class="text-primary">BODY PARAMS</h4>
+            <table cellspacing="0" cellpadding="0" border="1" style="width: 100%">
+                <tbody>
+                <tr>
+                    <th>PARAM</th>
+                    <th>TYPE</th>
+                    <th>REQUIRED</th>
+                </tr>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>Y</td>
+                </tr>
+                <tr>
+                    <td>startBarsfMilestoneIndex</td>
+                    <td>int32</td>
+                    <td>Y</td>
+                </tr>
+                <tr>
+                    <td>endBarsfMilestoneIndex</td>
+                    <td>int32</td>
+                    <td>Y</td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 class="text-primary">RESPONSE</h4>
+            <pre><code class="json">{
+    "rates": ["0.1","0.15"],
+    "barsfMilestoneIndexes": [1100,1250],
+    "duration": 10
+}
+            </code></pre>
+            <h4 class="text-primary">RETURN VALUE</h4>
+            <ul>
+                <li>rates: 费率变化数组</li>
+                <li>barsfMilestoneIndexes: 费率对应的的barsf里程碑的序号</li>
+            </ul>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+<!--
+ 添加批量地址查找Transaction接口
+
+合并34接口
+   state仅包含: suceess  invalid(包含非法格式) pengding(包含多次尝试中) notfound
+ -->
+
+<footer class="footer">
+    <div class="container "><a href="/live-transactions">Live transactions</a>
+        <span>|</span>
+        <a href="http://barsf.org">barsf</a></div>
+</footer>
+
+<!-- jQuery -->
+<script src="../../static/js/jquery.min.js"></script>
+<script>
+ $("#apis").find("a").bind("click",function(){
+     $(this).siblings().removeClass("active");
+     $(this).addClass("active");
+ });
+</script>
+<!-- Bootstrap -->
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/custom.js"></script>
+</body>
+</html>

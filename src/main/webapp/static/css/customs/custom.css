@@ -1,0 +1,276 @@
+body {
+    padding-top: 50px;
+     background: #F5F5F5;
+}
+
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    #search {
+        width: 100% !important;
+        max-width: 1200px !important;
+    }
+}
+@media(min-width: 768px){
+    #search_2 {
+        display: none!important;
+    }
+}
+
+.home-container{
+    color: #111;
+    background: #f3f3f2;
+    min-height: 300px;
+    width: 100%;
+}
+
+.c555{
+    color: #555;
+}
+.target:target{
+    padding-top:130px;
+    transition: 0.5s;
+}
+
+.passby{
+    margin: 13px;
+    background: #f1f1fd;
+    -moz-box-shadow:2px 2px 5px #8a8a8a;
+    -webkit-box-shadow:2px 2px 5px #8a8a8a;
+    box-shadow: 2px 2px 5px #8a8a8a;
+    border-radius: 5px;
+}
+
+.main-input{
+    font-size: 18px;
+    height: 80px;
+}
+
+#search {
+    padding: 36px;
+    width: 100%;
+    max-width: 540px;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search_index{
+    padding: 36px 0 36px 0 !important;
+    width:  96% !important;
+    font-size:13px !important;
+    max-width: 100% !important;
+}
+
+.wb_table {
+    table-layout: fixed;
+}
+
+.wb_table > tbody > tr > td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.entry {
+    margin: 60px auto;
+}
+
+.info-row__value {
+    word-wrap: break-word;
+}
+
+.custom-padding {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #F6F6F5;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}
+
+.bb {
+    border-bottom: 1px solid #c5cfd4;
+}
+.pp{
+    font-family: "Adobe Ming Std L", sans-serif;
+}
+
+.summary-info__col-title {
+    display: block;
+}
+
+.translation_missing {
+     margin-right: 25px;
+}
+
+.oneApi{
+    padding: 15px;
+    border-radius: 5px;
+}
+.oneApi:hover{
+    background: rgba(230, 230, 250, 0.38);
+}
+.margin-15{
+    margin: 15px;
+}
+.padding-10{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.break{
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.separator{
+    padding: .75rem 1rem;
+    background-color: #f6f7f8;
+    display: block;
+    font-size: 2rem;
+    margin-bottom: .75rem;
+    margin-top: .75rem;
+    color:#777788;
+}
+
+.info-row{
+    display: -webkit-box;
+    justify-content: space-between;
+    margin: 15px;
+}
+.summary-info {
+    display: -webkit-box;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+}
+
+.summary-info__col-value{
+}
+
+
+.text-center {
+    text-align: center!important;
+}
+
+
+.info-row__label {
+    display: block;
+}
+.info-row__value{
+
+}
+
+.bundle-head{
+    padding: 15px;
+    font-size: 18px;
+    color: #080808;
+}
+
+.b-h-l{
+    display: inline;
+}
+.b-h-r{
+    display: inline;
+    float: right;
+}
+
+.tx-value{
+    color: #000;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-weight: 700;
+    font-size: 12px;
+    float: right;
+}
+
+.tx-state{
+    color: white;
+    border-radius: 5px;
+    font-family: -webkit-pictograph;
+    font-size: 1%;
+}
+.tx-state-x{
+    color: white;
+    border-radius: 5px;
+    font-family: -webkit-pictograph;
+    font-size: 100%;
+}
+.btn-empty{
+    background: none;
+    color: blue;
+}
+
+.shan{
+    display: block;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    height: 20px;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #F4F7F8;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        /*background: white;*/
+        background-position: -1000px 0;
+    }
+    100%{
+        /*background: white;*/
+        background-position: 1000px 0;
+    }
+}
+
+@-moz-keyframes placeHolderShimmer /* Firefox */
+{
+    0% {
+        /*background: white;*/
+        background-position: -1000px 0;
+    }
+    100%{
+        /*background: white;*/
+        background-position: 1000px 0;
+    }
+}
+
+@-webkit-keyframes placeHolderShimmer /* Safari and Chrome */
+{
+    0% {
+        /*background: white;*/
+        background-position: -1000px 0;
+    }
+    100%{
+        /*background: white;*/
+        background-position: 1000px 0;
+    }
+}
+
+@-o-keyframes placeHolderShimmer /* Opera */
+{
+    0% {
+        /*background: white;*/
+        background-position: -1000px 0;
+    }
+    100%{
+        /*background: white;*/
+        background-position: 1000px 0;
+    }
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+}

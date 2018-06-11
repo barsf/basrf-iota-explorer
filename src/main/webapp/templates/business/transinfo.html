@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#FF0000"/>
+<title>Iota Explorer</title>
+<!-- Bootstrap -->
+<link href="../../static/css/vendors/bootstrap.css" rel="stylesheet"/>
+<!--Cookfont-->
+<link href="../static/css/vendors/font-awesome.min.css" rel="stylesheet"/>
+
+<link href="../../static/css/customs/custom.css" rel="stylesheet"/>
+
+<!-- =============================body=================================== -->
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IOTA explorer </a>
+            <span class="navbar-brand">&nbsp;&nbsp;&nbsp;| </span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/live-transactions">Live</a></li>
+                <li><a href="/barsfapi">API</a></li>
+                <li id="search_2" class="search collapse navbar-collapse">
+                    <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                        <input type="text" class="form-control input-lg"
+                               placeholder="transaction/address/bundle/tag -> Enter">
+                    </div>
+                </li>
+            </ul>
+            <div id="search" class="search collapse navbar-collapse">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          aria-hidden="true"></span></span>
+                    <input type="text" class="form-control input-lg"
+                           placeholder="transaction/address/bundle/tag -> Enter">
+                </div>
+            </div>
+        </div><!--/.nav-collapse -->
+
+    </div>
+</nav>
+
+<div class="container entry">
+    <div class="page-header">
+        <h1>Transaction
+            <small>details</small>
+        </h1>
+    </div>
+    <div class="jumbotron">
+        <div class="info-row"><label class="translation_missing">Hash</label><a
+                id="hash" class="break" th:text="${pk}"></a>
+            <button class="copy btn btn-xs" data-clipboard-target="#hash" data-copy="Copy" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <path fill="#8FA9B0" fill-rule="nonzero"
+                          d="M10.943 1H6c-.735 0-1.333.571-1.333 1.273v8.909c0 .702.598 1.273 1.333 1.273h6.667c.735 0 1.333-.571 1.333-1.273V3.918L10.943 1zM10 4.818V1.636l3.333 3.182H10zM3.333 3.545v10.182h8V15h-8C2.598 15 2 14.43 2 13.727V3.545h1.333z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="info-row bb">
+            <div class="row">
+                <div class="col-xs-1">
+                    <label class="">Time</label>
+                </div>
+                <div class="col-xs-11">
+                <span
+                        id="time"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-info">
+            <div class="row">
+                <div class="col-xs-6 "><label class="info-row__label">Amount</label>
+                    <div class="summary-info__col-title shan" id="amount"><span></span></div>
+                </div>
+                <div class="col-xs-6"><label class="info-row__label">Status</label>
+                    <p class="summary-info__col-title shan" id="status"></p></div>
+            </div>
+        </div>
+
+        <div class="summary-info bb">
+            <div class="row">
+                <div class="col-xs-6 "><label class="info-row__label">Conversion</label>
+                    <div class="summary-info__col-title shan" id="worth"><span class="currency fa fa-spinner"></span>
+                    </div>
+                </div>
+                <div class="col-xs-6"><label class="info-row__label">
+                    <a class="btn btn-empty fa fa-caret-left" id="index_left"></a>Index
+                    <a class="btn btn-empty fa fa-caret-right" id="index_right"></a>
+                </label>
+                    <p class="summary-info__col-title shan" id="index"></p></div>
+            </div>
+        </div>
+
+        <div class="info-row ">
+            <div class="row">
+                <div class="col-xs-2"><label class="translation_missing">Tag</label></div>
+                <div class="col-xs-10">
+                    <p
+                            class="info-row__value shan" id="tag"></p>
+                </div>
+            </div>
+        </div>
+        <div class="info-row ">
+            <div class="row">
+                <div class="col-xs-2"><label class="translation_missing">Iota
+                    address</label></div>
+                <div class="col-xs-10"><a class="shan break" id="address"></a>
+                    <!--<button class="copy btn btn-xs" data-clipboard-target="#address" data-copy="Copy" type="button">-->
+
+                    <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">-->
+                    <!--<path fill="#8FA9B0" fill-rule="nonzero"-->
+                    <!--d="M10.943 1H6c-.735 0-1.333.571-1.333 1.273v8.909c0 .702.598 1.273 1.333 1.273h6.667c.735 0 1.333-.571 1.333-1.273V3.918L10.943 1zM10 4.818V1.636l3.333 3.182H10zM3.333 3.545v10.182h8V15h-8C2.598 15 2 14.43 2 13.727V3.545h1.333z"></path>-->
+                    <!--</svg>-->
+                    <!--</button>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="info-row bb">
+            <div class="row">
+                <div class="col-xs-2"><label>Bundle</label></div>
+                <div class="col-xs-10"><a class="info-row__value shan"
+                                          id="bundle"></a></div>
+            </div>
+        </div>
+        <p class="separator">Parent transactions</p>
+
+        <div class="info-row">
+            <div class="row">
+                <div class="col-xs-2"><label>Trunk</label></div>
+                <div class="col-xs-10">
+                    <a class="info-row__value shan"
+                       id="trunk"></a>
+                </div>
+            </div>
+        </div>
+        <div class="info-row bb">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>Branch</label></div>
+                <div class="col-xs-10"><a class="info-row__value shan"
+                                          id="branch"></a>
+                </div>
+            </div>
+        </div>
+        <div hidden="hidden" id="signature_separator">
+            <p class="separator" >Signature</p>
+        </div>
+        <div class="info-row">
+            <div style="width:100%" hidden="hidden">
+                <p class="info-row__value shan" style="font-size: 10px" id="signature"></p>
+            </div>
+            <button class="btn btn-default btn-block" id="signature-btn" style="width: 100%" onclick="showSignature()"
+                    type="button"><span
+                    class="show-all">Show Signature</span></button>
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+
+<footer class="footer">
+    <div class="container "><a href="/live-transactions">Live transactions</a>
+        <span>|</span>
+        <a href="http://barsf.org">barsf</a></div>
+</footer>
+<!-- jQuery -->
+<script src="../../static/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../../static/js/bootstrap.min.js"></script>
+<!-- copy -->
+<script type="text/javascript" src="../../static/js/jquery.zclip.js"></script>
+<!-- main -->
+<script src="./../static/js/custom.js"></script>
+<script>
+    loadTrans()
+</script>
+</body>
+<!-- ========================================body========================================= -->
+
+</html>
