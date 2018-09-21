@@ -15,11 +15,9 @@
             <transactionManager type="JDBC"/>
             <dataSource type="cn.zhonggu.barsf.iota.explorer.dao.HikariDBSourceFactory">
                 <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-                <!--<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/iota"/>-->
-                <property name="jdbcUrl" value="jdbc:mysql://35.201.245.54:3306/iota"/>
-                <!--<property name="jdbcUrl" value="jdbc:mysql://google/iota?cloudSqlInstance=m1120901032:asia-east1:barsf&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory"/>-->
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="jdbcUrl" value="jdbc:mysql://xxxxxxx/iota"/>
+                <property name="username" value="xxx"/>
+                <property name="password" value="xxx"/>
                 <property name="maximumPoolSize" value="40"/>
                 <property name="minimumIdle" value="5"/>
                 <property name="connectionTestQuery" value="select 1"/>
